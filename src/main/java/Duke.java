@@ -42,39 +42,39 @@ public class Duke {
                 System.out.println(" " + chosenTask);
             }
             else if(line.startsWith("todo")){
-                Task toDo = new ToDo(line.replace("todo", ""));
+                Task toDo = new ToDo(line.replace("todo ", ""));
                 tasks.add(toDo);
-                System.out.println("Got it. I've added this task:");
-                System.out.println("   " + toDo);
-                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                printTask(toDo, tasks);
             }
             else if(line.startsWith("deadline")){
                 String date = line.split("/")[1];
                 String description = line.split("/")[0].replace("deadline ", "");
                 Task taskDeadline = new Deadline(description, date);
                 tasks.add(taskDeadline);
-                System.out.println("Got it. I've added this task:");
-                System.out.println("   " + taskDeadline);
-                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                printTask(taskDeadline, tasks);
             }
             else if(line.startsWith("event")){
                 String time = line.split("/")[1];
                 String description = line.split("/")[0].replace("deadline ", "");
                 Task taskEvent = new Event(description, time);
                 tasks.add(taskEvent);
-                System.out.println("Got it. I've added this task:");
-                System.out.println("   " + taskEvent);
-                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                printTask(taskEvent, tasks);
             }
             else {
                 Task newTask = new Task(line);
                 System.out.println("added: " + line);
                 tasks.add(newTask);
-
             }
             line = in.nextLine();
         }
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println(logoEnd);
+    }
+
+    public static void printTask(Task taskType,  ArrayList<Task> tasks){
+        System.out.println("Got it. I've added this task:");
+        System.out.println("   " + taskType);
+        System.out.println("---------------------------------------------------------------------------");
+        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
     }
 }
