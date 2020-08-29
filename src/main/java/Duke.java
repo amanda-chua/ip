@@ -8,7 +8,22 @@ public class Duke {
         Scanner in = new Scanner(System.in);
         ArrayList<Task> tasks = new ArrayList<Task>();
 
+        String logoStart = "       _____________       \n"
+                + "      /             \\     \n"
+                + "  \\  /    >      <   \\  /\n"
+                + "   \\|         *       |/ \n"
+                + "     \\               /   \n"
+                + "      \\_____________/    \n"
+                + "         ^^     ^^        \n";
+        String logoEnd = "       _____________       \n"
+                + "      /             \\     \n"
+                + "     /    x      x   \\   \n"
+                + "  /\\|         ~       |/\\ \n"
+                + "     \\               /   \n"
+                + "   ~  \\_____________/    \n"
+                + "  ~      ^^     ^^        \n";
         System.out.println("Hello! I'm Duke");
+        System.out.println(logoStart);
         System.out.println("What can I do for you?");
 
         line = in.nextLine();
@@ -26,6 +41,31 @@ public class Duke {
                 System.out.println("Nice! I've marked this task as done:");
                 System.out.println(" " + chosenTask);
             }
+            else if(line.startsWith("todo")){
+                Task toDo = new ToDo(line.replace("todo", ""));
+                tasks.add(toDo);
+                System.out.println("Got it. I've added this task:");
+                System.out.println("   " + toDo);
+                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+            }
+            else if(line.startsWith("deadline")){
+                String date = line.split("/")[1];
+                String description = line.split("/")[0].replace("deadline ", "");
+                Task taskDeadline = new Deadline(description, date);
+                tasks.add(taskDeadline);
+                System.out.println("Got it. I've added this task:");
+                System.out.println("   " + taskDeadline);
+                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+            }
+            else if(line.startsWith("event")){
+                String time = line.split("/")[1];
+                String description = line.split("/")[0].replace("deadline ", "");
+                Task taskEvent = new Event(description, time);
+                tasks.add(taskEvent);
+                System.out.println("Got it. I've added this task:");
+                System.out.println("   " + taskEvent);
+                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+            }
             else {
                 Task newTask = new Task(line);
                 System.out.println("added: " + line);
@@ -35,5 +75,6 @@ public class Duke {
             line = in.nextLine();
         }
         System.out.println("Bye. Hope to see you again soon!");
+        System.out.println(logoEnd);
     }
 }
