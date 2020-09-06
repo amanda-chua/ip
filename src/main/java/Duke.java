@@ -34,67 +34,77 @@ public class Duke {
 
         while(!in.hasNext("bye")) {
             String line = in.nextLine();
-            if(line.equals("list")) {
-                System.out.println("Here are the tasks in your list:");
-                for(int i=0; i<tasks.size(); i++) {
-                    System.out.println((i+1) + "." + tasks.get(i));
-                }
-            }
-            else if(line.startsWith("done")) {
-                int taskNo = Integer.parseInt(line.substring(5));
-                Task chosenTask = tasks.get(taskNo-1);
-                chosenTask.markDone();
-                System.out.println("Nice! I've marked this task as done:");
-                System.out.println(" " + chosenTask);
-            }
-            else if(line.startsWith("todo")){
-                int noOfWords = 0;
-                for (String description : line.split(" ")) {
-                    noOfWords++;
-                }
-                if (noOfWords > 1) {
-                    Task toDo = new ToDo(line.replace("todo ", ""));
-                    tasks.add(toDo);
-                    printTask(toDo, tasks);
-                }
-                else{
-                    System.out.println("-------------------------------------------------------------------\n" +
-                            "☹ OOPS!!! The description of a todo cannot be empty.\n" +
+            try {
+                if (line.equals("list")) {
+                    System.out.println("Here are the tasks in your list:");
+                    for (int i = 0; i < tasks.size(); i++) {
+                        System.out.println((i + 1) + "." + tasks.get(i));
+                    }
+                } else if (line.startsWith("done")) {
+                    int taskNo = Integer.parseInt(line.substring(5));
+                    Task chosenTask = tasks.get(taskNo - 1);
+                    chosenTask.markDone();
+                    System.out.println("Nice! I've marked this task as done:");
+                    System.out.println(" " + chosenTask);
+                } else if (line.startsWith("todo")) {
+                    int noOfWords = 0;
+                    for (String description : line.split(" ")) {
+                        noOfWords++;
+                    }
+                    if (noOfWords > 1) {
+                        Task toDo = new ToDo(line.replace("todo ", ""));
+                        tasks.add(toDo);
+                        printTask(toDo, tasks);
+                    } else {
+                        System.out.println("-------------------------------------------------------------------\n" +
+                                "☹ OOPS!!! The description of a todo cannot be empty.\n" +
+                                "-------------------------------------------------------------------\n");
+                    }
+                } else if (line.startsWith("deadline")) {
+                    try {
+                        String deadline = line.split(" ", 2)[1];
+                        try {
+                            String date = deadline.split("/")[1];
+                            String description = deadline.split("/")[0].replace(" ", "");
+                            Task taskDeadline = new Deadline(description, date);
+                            tasks.add(taskDeadline);
+                            printTask(taskDeadline, tasks);
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            throw new DukeException("-------------------------------------------------------------------\n" +
+                                    "☹ OOPS!!! The deadline date cannot be empty.\n" +
+                                    "-------------------------------------------------------------------\n");
+                        }
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        throw new DukeException("-------------------------------------------------------------------\n" +
+                                "☹ OOPS!!! The deadline description cannot be empty.\n" +
+                                "-------------------------------------------------------------------\n");
+                    }
+                } else if (line.startsWith("event")) {
+                    try {
+                        String event = line.split(" ", 2)[1];
+                        try {
+                            String time = event.split("/")[1];
+                            String description = event.split("/")[0].replace(" ", "");
+                            Task taskEvent = new Event(description, time);
+                            tasks.add(taskEvent);
+                            printTask(taskEvent, tasks);
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            throw new DukeException("-------------------------------------------------------------------\n" +
+                                    "☹ OOPS!!! The event time cannot be empty.\n" +
+                                    "-------------------------------------------------------------------\n");
+                        }
+                    } catch(ArrayIndexOutOfBoundsException e) {
+                            throw new DukeException("-------------------------------------------------------------------\n" +
+                                    "☹ OOPS!!! The event description cannot be empty.\n" +
+                                    "-------------------------------------------------------------------\n");
+                    }
+                } else {
+                    throw new DukeException("-------------------------------------------------------------------\n" +
+                            "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
                             "-------------------------------------------------------------------\n");
                 }
-            }
-            else if(line.startsWith("deadline")){
-                try {
-                    String date = line.split("/")[1];
-                    String description = line.split("/")[0].replace("deadline ", "");
-                    Task taskDeadline = new Deadline(description, date);
-                    tasks.add(taskDeadline);
-                    printTask(taskDeadline, tasks);
-                }
-                catch (ArrayIndexOutOfBoundsException ex){
-                    System.out.println("-------------------------------------------------------------------\n" +
-                            "☹ OOPS!!! The deadline input cannot be empty.\n" +
-                            "-------------------------------------------------------------------\n");
-                }
-            }
-            else if(line.startsWith("event")){
-                try {
-                    String time = line.split("/")[1];
-                    String description = line.split("/")[0].replace("event ", "");
-                    Task taskEvent = new Event(description, time);
-                    tasks.add(taskEvent);
-                    printTask(taskEvent, tasks);
-                }
-                catch (ArrayIndexOutOfBoundsException ex){
-                    System.out.println("-------------------------------------------------------------------\n" +
-                            "☹ OOPS!!! The event input cannot be empty.\n" +
-                            "-------------------------------------------------------------------\n");
-                }
-            }
-            else {
-                System.out.println("-------------------------------------------------------------------\n" +
-                        "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
-                        "-------------------------------------------------------------------\n");
+            } catch(DukeException e) {
+                System.out.println(e.getMessage());
             }
         }
         System.out.println("Bye. Hope to see you again soon!");
