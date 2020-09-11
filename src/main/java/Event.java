@@ -10,4 +10,9 @@ public class Event extends Task{
     public String toString() {
         return "[E]" + super.toString() + " (" + time + ")";
     }
+
+    @Override
+    public String writeToFile() {
+        return "E|" + status + "|" + description + "|" + this.time;
+    }
 }
