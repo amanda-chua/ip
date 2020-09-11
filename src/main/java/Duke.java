@@ -58,7 +58,7 @@ public class Duke {
         System.out.println("Got it. I've added this task:");
         System.out.println("   " + taskType);
         System.out.println("-------------------------------------------------------------------");
-        System.out.println("Now you have " + tasks.size() + " tasks in the list.\n");
+        System.out.println("Now you have " + tasks.size() + " tasks in the list!\n");
     }
 
 
