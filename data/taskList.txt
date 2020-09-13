@@ -1,7 +1,0 @@
-T|0|eat
-E|0|dance|at 2pm
-D|1|drink|by sun
-E|0|hop|at 1am
-T|0|borrow things
-E|0|say bye|at 2pm
-D|0|say hi|by wed

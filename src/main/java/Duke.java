@@ -7,12 +7,11 @@ import java.util.ArrayList;
 
 public class Duke {
 
-    public static String file = "data/taskList.txt";
     static ArrayList<Task> tasks = new ArrayList<>();
 
-    public static void writeTaskToFile(String file) {
+    public static void writeTaskToFile(String filePath) {
         try {
-            FileWriter fw = new FileWriter(file);
+            FileWriter fw = new FileWriter(filePath);
             for (Task taskToAdd : tasks) {
                 fw.write(taskToAdd.writeToFile() + "\n");
             }
@@ -22,9 +21,9 @@ public class Duke {
         }
     }
 
-    public static void readTask(String file) {
+    public static void readTask(String filePath) {
         try {
-            File taskList = new File(file);
+            File taskList = new File(filePath);
             Scanner sc = new Scanner(taskList);
             while (sc.hasNextLine()) {
                 tasks.add(convertTextToTask(sc.nextLine()));
@@ -63,9 +62,18 @@ public class Duke {
 
 
     public static void main(String[] args) {
-        readTask(file);
+        String filePath = "taskList.txt";
+        File file = new File(filePath);
+        try {
+            file.createNewFile();
+            readTask(filePath);
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        } catch (IOException e) {
+            System.out.println("Something went wrong");
+        }
+
         Scanner in = new Scanner(System.in);
-        //ArrayList<Task> tasks = new ArrayList<>();
 
         String logoStart = "       _____________       \n"
                 + "      /             \\     \n"
@@ -99,14 +107,14 @@ public class Duke {
                     chosenTask.markDone();
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println(" " + chosenTask);
-                    writeTaskToFile(file);
+                    writeTaskToFile(filePath);
                 } else if (line.startsWith("delete")) {
                     int taskNo = Integer.parseInt(line.substring(7));
                     Task chosenTask = tasks.remove(taskNo - 1);
                     System.out.println("Noted. I've removed this task:");
                     System.out.println("\t" + chosenTask);
                     System.out.printf("Now you have %d tasks in the list.\n", tasks.size());
-                    writeTaskToFile(file);
+                    writeTaskToFile(filePath);
                 } else if (line.startsWith("todo")) {
                     int noOfWords = 0;
                     for (String description : line.split(" ")) {
@@ -116,7 +124,7 @@ public class Duke {
                         Task toDo = new ToDo(line.replace("todo ", ""));
                         tasks.add(toDo);
                         printTask(toDo, tasks);
-                        writeTaskToFile(file);
+                        writeTaskToFile(filePath);
                     } else {
                         System.out.println("-------------------------------------------------------------------\n" +
                                 "☹ OOPS!!! The description of a todo cannot be empty.\n" +
@@ -131,7 +139,7 @@ public class Duke {
                             Task taskDeadline = new Deadline(description, date);
                             tasks.add(taskDeadline);
                             printTask(taskDeadline, tasks);
-                            writeTaskToFile(file);
+                            writeTaskToFile(filePath);
                         } catch (ArrayIndexOutOfBoundsException e) {
                             throw new DukeException("-------------------------------------------------------------------\n" +
                                     "☹ OOPS!!! The deadline date cannot be empty.\n" +
@@ -151,7 +159,7 @@ public class Duke {
                             Task taskEvent = new Event(description, time);
                             tasks.add(taskEvent);
                             printTask(taskEvent, tasks);
-                            writeTaskToFile(file);
+                            writeTaskToFile(filePath);
                         } catch (ArrayIndexOutOfBoundsException e) {
                             throw new DukeException("-------------------------------------------------------------------\n" +
                                     "☹ OOPS!!! The event time cannot be empty.\n" +
