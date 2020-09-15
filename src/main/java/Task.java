@@ -10,13 +10,12 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? "Y" : "N"); //return Y for Yes or N for No
     }
 
     public void markDone() {
         this.isDone = true;
         this.status = 1;
-        //return this;
     }
 
     public String writeToFile() {
