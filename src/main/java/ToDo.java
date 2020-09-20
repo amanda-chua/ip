@@ -1,15 +1,16 @@
-public class ToDo extends Task{
-    public ToDo(String description){
+public class ToDo extends Task {
+    public ToDo(String description) {
         super(description);
     }
 
     @Override
-    public String toString(){
-        return "[T]" + super.toString();
+    public String getType() {
+        return "T";
     }
 
     @Override
-    public String writeToFile() {
-        return "T|" + status + "|" + description;
+    public String toString() {
+        return "[T]" + super.toString();
     }
+
 }

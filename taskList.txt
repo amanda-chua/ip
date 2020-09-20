@@ -1,4 +1,8 @@
-T|0|run
-D|1|hop|by sunday
-E|0|laugh|at 2pm
-E|1|hi|at 3pm
+T | 1 | eat
+E | 1 | hi  | 2pm
+E | 0 | jump  | 3pm
+E | 0 | run  | 3pm
+D | 1 | kick  | sunday
+D | 1 | work  | tues
+E | 0 | do  | 1pm
+E | 1 | walk  | 10am
