@@ -1,4 +1,7 @@
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class AddCommand extends Command {
     protected static String cmd;
@@ -18,7 +21,9 @@ public class AddCommand extends Command {
         } else if (cmd.equals("deadline")) {
             String date = details.split("/by ")[1];
             String description = details.split("/by ")[0];
-            task = new Deadline(description, date);
+            LocalDate dateFromString = LocalDate.parse(date);
+            String localDate = dateFromString.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+            task = new Deadline(description, localDate);
             t.taskList.add(task);
         } else if (cmd.equals("event")) {
             String time = details.split("/at ")[1];
