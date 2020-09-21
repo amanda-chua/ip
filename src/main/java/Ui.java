@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Ui {
     protected static Scanner sc;
@@ -55,6 +56,17 @@ public class Ui {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < tl.taskList.size(); i++) {
             System.out.println((i+1) + ". " + tl.taskList.get(i).toString());
+        }
+    }
+
+    public static void findMatchMessage(ArrayList<Task> result) {
+        if (result.size() != 0) {
+            System.out.println("Here are the matching tasks in your list:");
+            for (int i = 0; i < result.size(); i++) {
+                System.out.println(" " + (i+1) + ". " + result.get(i).toString());
+            }
+        } else {
+            System.out.println("Sorry, no match found.");
         }
     }
 
