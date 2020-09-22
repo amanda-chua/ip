@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 /**
  * Handles user interface of Duke.
@@ -99,6 +100,17 @@ public class Ui {
     /**
      * Prints exit message.
      */
+    public static void findMatchMessage(ArrayList<Task> result) {
+        if (result.size() != 0) {
+            System.out.println("Here are the matching tasks in your list:");
+            for (int i = 0; i < result.size(); i++) {
+                System.out.println(" " + (i+1) + ". " + result.get(i).toString());
+            }
+        } else {
+            System.out.println("Sorry, no match found.");
+        }
+    }
+    
     public static void exitLine() {
         String logoEnd = "       _____________       \n"
                 + "      /             \\     \n"
