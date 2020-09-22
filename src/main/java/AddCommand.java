@@ -3,6 +3,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Handles adding tasks to the TaskList.
+ */
 public class AddCommand extends Command {
     protected static String cmd;
     protected static String details;
@@ -12,6 +15,13 @@ public class AddCommand extends Command {
         details = d;
     }
 
+    /**
+     * Adds a task to the taskList based on command and
+     * calls Ui to print add message.
+     * @param t TaskList
+     * @param u Ui
+     * @param s Storage
+     */
     @Override
     public void execute(TaskList t, Ui u, Storage s) {
         Task task = new Task("null");

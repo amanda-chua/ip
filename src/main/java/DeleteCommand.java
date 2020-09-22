@@ -1,5 +1,8 @@
 import java.io.IOException;
 
+/**
+ * Handles the delete command.
+ */
 public class DeleteCommand extends Command {
     protected static int delete;
 
@@ -7,6 +10,13 @@ public class DeleteCommand extends Command {
         delete = d;
     }
 
+    /**
+     * Deletes a task from the taskList and
+     * calls Ui to print delete message.
+     * @param t TaskList
+     * @param u Ui
+     * @param s Storage
+     */
     @Override
     public void execute(TaskList t, Ui u, Storage s) {
         Task task = t.taskList.get(delete);

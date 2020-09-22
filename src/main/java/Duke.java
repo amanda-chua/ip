@@ -1,6 +1,8 @@
 import java.io.FileNotFoundException;
 
-
+/**
+ * Handles the main logic of the program.
+ */
 public class Duke {
     private static Storage storage;
     private static TaskList tasks;

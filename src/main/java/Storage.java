@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Handles storage of tasks in File.
+ */
 public class Storage {
     protected static String filepath;
 
@@ -12,6 +15,12 @@ public class Storage {
         this.filepath = filepath;
     }
 
+    /**
+     * Creates new File if File does not exist then
+     * loads Tasks into the TaskList using details from File.
+     * @return ArrayList to be used to create a new TaskList.
+     * @throws FileNotFoundException if File is not found.
+     */
     public static ArrayList<Task> convertTextToTaskList() throws FileNotFoundException {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
@@ -47,6 +56,13 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Writes data into the txt file whenever the task list changes
+     * @param append Boolean to show if File can be appended
+     * @param s task to be updated.
+     * @param t TaskList.
+     * @throws IOException if there is an error.
+     */
     public static void writeTaskToFile(boolean append, String s, TaskList t) throws IOException {
         FileWriter fileWriter;
         if (!append) {
