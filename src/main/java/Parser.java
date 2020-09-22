@@ -1,5 +1,15 @@
+/**
+ * Handles parsing of user input
+ */
 public class Parser {
 
+    /**
+     * Parses user input and recognises what type of command
+     * the user is looking for
+     * @param input String representing user input
+     * @return new Command object based on what the user input is
+     * @throws DukeException if the user's input is not recognised
+     */
     public static Command parse(String input) throws DukeException {
         String[] array = input.split(" ", 2);
         String cmd = array[0];

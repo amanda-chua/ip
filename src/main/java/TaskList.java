@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 
+/**
+ * Handles storing Tasks in an ArrayList.
+ */
 public class TaskList {
     protected static ArrayList<Task> taskList;
 
