@@ -115,38 +115,38 @@ Expected output:
      Now you have 2 tasks in the list.
      ---------------------------------------------------------------------
      
- ### 6. Find tasks consisting a keyword
- This feature finds task consisting of the keyword from list:
+### 6. Find tasks consisting a keyword
+This feature finds task consisting of the keyword from list:
  
- Format: 'find [keyword]'    
+Format: 'find [keyword]'    
  
- Example:
-     `find read`
+Example:
+    `find read`
      
- Expected output:
+Expected output:
  
-      Here are the matching tasks in your list:
-       1. [T][Y] read book
-      ---------------------------------------------------------------------
+     Here are the matching tasks in your list:
+      1. [T][Y] read book
+     ---------------------------------------------------------------------
       
     
- ### 7. Exit Duke
- This feature exits the program:
+### 7. Exit Duke
+This feature exits the program:
  
- Format: 'bye'    
+Format: 'bye'    
  
- Example:
-     `bye`
+Example:
+    `bye`
      
- Expected output:
- 
-             _____________       
-            /             \     
-           /    x      x   \   
-        /\|         ~       |/\ 
-           \               /   
-         ~  \_____________/    
-        ~      ^^     ^^        
-      
-      Bye. Hope to see you again soon!
-      ---------------------------------------------------------------------
+Expected output:
+
+            _____________       
+           /             \     
+          /    x      x   \   
+       /\|         ~       |/\ 
+          \               /   
+        ~  \_____________/    
+       ~      ^^     ^^        
+     
+     Bye. Hope to see you again soon!
+     ---------------------------------------------------------------------
